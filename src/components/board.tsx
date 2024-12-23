@@ -11,7 +11,6 @@ export default function Board({ matrix }: BoardProps) {
 
   const handleCorrectCellChange = (row: number, col: number, newCellText: string) => {
     const boardCopy = createBoardCopy(dynamicBoard)
-
     checkToLeftLetters(boardCopy, row, col, newCellText)
     checkToRightLetters(boardCopy, row, col, newCellText)
     setDynamicBoard(boardCopy)
@@ -67,42 +66,47 @@ function checkToLeftLetters(board: Cell[][], row: number, col: number, newCellTe
   }
 }
 
-function checkToRightLetters(board: Cell[][], row: number, col: number, newCellText: string) {
+
+function checkToRightLetters(board: Cell[][], row: number, col: number, newCellText: string): void {
   const rowCells = board[row]
 
   const rightCells = rowCells.slice(col + 1)
-  const nextInfoIndex = col + 1 + rightCells.findIndex((cell) => cell.cellType === CellType.info)
-  const nextEmptyIndex = col + 1 + rightCells.findIndex((cell) => cell.cellType === CellType.empty)
-
-  if (nextInfoIndex === -1 || (nextEmptyIndex !== -1 && nextEmptyIndex < nextInfoIndex)) {
+  let nextInfoCellIndex = rightCells.findIndex((cell) => cell.cellType === CellType.info)
+  if (nextInfoCellIndex === -1) {
     return
   }
 
-  const infoCell = rowCells[nextInfoIndex] as CellClue
+  nextInfoCellIndex = col + 1 + nextInfoCellIndex
+  const nextEmptyCellIndex = col + 1 + rightCells.findIndex((cell) => cell.cellType === CellType.empty)
+
+  if (nextInfoCellIndex < nextEmptyCellIndex) {
+    return
+  }
+
+  const infoCell = rowCells[nextInfoCellIndex] as CellClue
   const leftClue = infoCell.information.find((info) => info.direction === "left")
   if (!leftClue) {
     return
   }
 
-  // Update the current cell's text if it's a letter cell
   if (rowCells[col].cellType === CellType.letter) {
     ;(rowCells[col] as CellLetter).currentText = newCellText
   }
 
-  // Construct the word formed by the letters to the left of the info cell
+  const firstValidIndexForWord = rowCells.slice(0, col + 1).findIndex(cell => cell.cellType != CellType.letter) + 1
+
   const word = rowCells
-    .slice(col, nextInfoIndex)
+    .slice(firstValidIndexForWord, nextInfoCellIndex)
     .filter((cell) => cell.cellType === CellType.letter)
     .map((cell: CellLetter) => cell.currentText)
     .join("")
 
-  // Validate the word against the clue
+
   if (word !== leftClue.correctWord) {
     return
   }
 
-  // Mark the cells as correctly placed
-  for (let i = col; i < nextInfoIndex; i++) {
+  for (let i = firstValidIndexForWord; i < nextInfoCellIndex; i++) {
     if (rowCells[i].cellType === CellType.letter) {
       ;(rowCells[i] as CellLetter).flag = true
     }

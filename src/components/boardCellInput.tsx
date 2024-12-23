@@ -25,10 +25,6 @@ export default function BoardCellInput({ text, currentText, flag, row, col, hand
     }
     event.target.value = content
 
-    if (content != cellContent) {
-      console.log("trigger global change")
-    }
-
     setCellContent(content)
 
     if (text === content) {

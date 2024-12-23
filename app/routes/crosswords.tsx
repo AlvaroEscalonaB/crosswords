@@ -10,9 +10,9 @@ export function meta({}: Route.MetaArgs) {
 
 const matrix: Cell[][] = [
   [
-    { cellType: CellType.info, information: [{ text: "Calcio", direction: "right", correctWord: "CA" }] },
     { cellType: CellType.letter, text: "C", flag: false, currentText: "" },
     { cellType: CellType.letter, text: "A", flag: false, currentText: "" },
+    { cellType: CellType.info, information: [{ text: "Calcio", direction: "left", correctWord: "CA" }] },
   ],
   [
     { cellType: CellType.info, information: [{ text: "Argon", direction: "right", correctWord: "AR" }] },
