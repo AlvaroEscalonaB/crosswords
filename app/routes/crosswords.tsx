@@ -8,23 +8,33 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "Crossword" }, { name: "description", content: "Board to play the puzzle of the day" }]
 }
 
-const matrix: Cell[][] = [
-  [
-    { cellType: CellType.letter, text: "C", flag: false, currentText: "" },
-    { cellType: CellType.letter, text: "A", flag: false, currentText: "" },
-    { cellType: CellType.info, information: [{ text: "Calcio", direction: "left", correctWord: "CA" }] },
-  ],
-  [
-    { cellType: CellType.info, information: [{ text: "Argon", direction: "right", correctWord: "AR" }] },
-    { cellType: CellType.letter, text: "A", flag: false, currentText: "" },
-    { cellType: CellType.letter, text: "R", flag: false, currentText: "" },
-  ],
-  [
-    { cellType: CellType.info, information: [{ direction: "right", text: "Carbono", correctWord: "C" }] },
-    { cellType: CellType.letter, text: "C", flag: false, currentText: "" },
-    { cellType: CellType.empty },
-  ],
-]
+// const matrix: Cell[][] = [
+//   [
+//     { cellType: CellType.letter, text: "A", flag: false, currentText: "" },
+//     { cellType: CellType.letter, text: "C", flag: false, currentText: "" },
+//     { cellType: CellType.info, information: [{ text: "CAC", direction: "below", correctWord: "CAC" }] },
+//     { cellType: CellType.empty },
+//   ],
+//   [
+//     { cellType: CellType.letter, text: "D", flag: false, currentText: "" },
+//     { cellType: CellType.letter, text: "A", flag: false, currentText: "" },
+//     { cellType: CellType.letter, text: "C", flag: false, currentText: "" },
+//     { cellType: CellType.info, information: [{ text: "Calcio (Inv)", direction: "left", correctWord: "CA" }] },
+//   ],
+//   [
+//     { cellType: CellType.letter, text: "A", flag: false, currentText: "" },
+//     { cellType: CellType.info, information: [{ text: "Argon", direction: "right", correctWord: "AR" }] },
+//     { cellType: CellType.letter, text: "A", flag: false, currentText: "" },
+//     { cellType: CellType.letter, text: "R", flag: false, currentText: "" },
+//   ],
+//   [
+//     { cellType: CellType.info, information: [{ text: "Main AA project", direction: "above", correctWord: "ADA" }] },
+//     { cellType: CellType.info, information: [{ direction: "right", text: "Carbono", correctWord: "C" }] },
+//     { cellType: CellType.letter, text: "C", flag: false, currentText: "" },
+//     { cellType: CellType.empty },
+//   ],
+// ]
+import { matrix } from "examples/official"
 
 export default function Crosswords() {
   return (
