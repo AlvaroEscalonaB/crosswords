@@ -5,27 +5,27 @@ import BoardCellInfo from "./boardCellInfo"
 
 interface BoardRow {
   rowItems: Cell[]
-  column: number
+  row: number
   handleCorrectCellChange: (col: number, row: number, newCellText: string) => void
 }
 
-const BoardRow = ({ rowItems, column, handleCorrectCellChange }: BoardRow) => {
+const BoardRow = ({ rowItems, row, handleCorrectCellChange }: BoardRow) => {
   return (
-    <div className="flex flex-row min-w-min">
-      {rowItems.map((cellItem, rowIndex) => {
+    <div className="flex flex-row min-w-min" data-type="row">
+      {rowItems.map((cellItem, colIndex) => {
         switch (cellItem.cellType) {
           case CellType.empty:
-            return <BoardCellEmpty key={rowIndex} />
+            return <BoardCellEmpty key={colIndex} />
           case CellType.info:
-            return <BoardCellInfo information={cellItem.information} key={rowIndex} />
+            return <BoardCellInfo information={cellItem.information} key={colIndex} />
           case CellType.letter:
             return (
               <BoardCellInput
                 text={cellItem.text}
                 flag={cellItem.flag}
-                row={rowIndex}
-                col={column}
-                key={rowIndex}
+                row={row}
+                col={colIndex}
+                key={colIndex}
                 currentText={cellItem.currentText}
                 handleCorrectCellChange={handleCorrectCellChange}
               />
