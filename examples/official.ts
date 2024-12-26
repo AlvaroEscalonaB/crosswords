@@ -4,7 +4,7 @@ import { CellType, type Cell } from "@custom_types/boardTypes"
 export const matrix: Cell[][] = [
   [
     { cellType: CellType.info, information: [
-      { text: "Después de carguío", direction: "right", correctWord: "CHANCADORES" },
+      { text: "Trituradoras", direction: "right", correctWord: "CHANCADORES" },
       { text: "Camello", direction: "below", correctWord: "DROMEDARIO" },
     ] },
     { cellType: CellType.letter, text: "C", flag: false, currentText: "" },
