@@ -6,7 +6,7 @@ export enum CellType {
 
 const directions = ["right", "left", "above", "below"] as const
 
-type Direction = typeof directions[number]
+export type Direction = typeof directions[number]
 
 export interface CellInformation {
   text: string
